@@ -24,10 +24,10 @@ jobs:
 
       - name: Run calendar plugin
         env:
-          TRMNL_TITLE: ${{ env.TRMNL_TITLE || 'Calendar' }}
+          TRMNL_TITLE: ${{ vars.TRMNL_TITLE || 'Calendar' }}
           TRMNL_WEBHOOK_URL: ${{ secrets.TRMNL_WEBHOOK_URL }}
           TRMNL_ICS_URL: ${{ secrets.TRMNL_ICS_URL }}
-          TRMNL_DAYS: ${{ env.TRMNL_DAYS || '2' }}
-          TRMNL_TZ: ${{ env.TRMNL_TZ || 'Europe/Berlin' }}
-          TRMNL_NUMBER_COLUMNS: ${{ env.TRMNL_NUMBER_COLUMNS || '2' }}
+          TRMNL_DAYS: ${{ vars.TRMNL_DAYS || '2' }}
+          TRMNL_TZ: ${{ vars.TRMNL_TZ || 'Europe/Berlin' }}
+          TRMNL_NUMBER_COLUMNS: ${{ vars.TRMNL_NUMBER_COLUMNS || '2' }}
         run: python main.py
