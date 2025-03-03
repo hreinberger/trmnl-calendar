@@ -1,0 +1,32 @@
+name: Update Calendar
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Run every 6 hours
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-calendar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run calendar plugin
+        env:
+          TRMNL_TITLE: ${{ env.TRMNL_TITLE }}
+          TRMNL_WEBHOOK_URL: ${{ secrets.TRMNL_WEBHOOK_URL }}
+          TRMNL_ICS_URL: ${{ secrets.TRMNL_ICS_URL }}
+          TRMNL_DAYS: ${{ env.TRMNL_DAYS || '2' }}
+          TRMNL_TZ: ${{ secrets.TRMNL_TZ }}
+          TRMNL_NUMBER_COLUMNS: ${{ env.TRMNL_NUMBER_COLUMNS || '2' }}
+        run: python main.py
