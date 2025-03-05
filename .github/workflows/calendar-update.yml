@@ -5,7 +5,7 @@ permissions:
 
 on:
     schedule:
-        - cron: '0 7-18 * * 1-5' # Run every hour from 7am to 6pm on weekdays
+        - cron: '0 6-18 * * 1-5' # Run every hour from 6am to 6pm on weekdays
     workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -33,4 +33,6 @@ jobs:
                   TRMNL_DAYS: ${{ vars.TRMNL_DAYS || '2' }}
                   TRMNL_TZ: ${{ vars.TRMNL_TZ || 'Europe/Berlin' }}
                   TRMNL_NUMBER_COLUMNS: ${{ vars.TRMNL_NUMBER_COLUMNS || '2' }}
+                  TRMNL_DATE_FORMAT: '%A (%d.%m.)'
+                  TRMNL_UPDATED_AT_FORMAT: '%X'
               run: python main.py
